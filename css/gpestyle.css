@@ -1,0 +1,319 @@
+body {
+  height: 100vh;
+  justify-content: center;
+  font-family: "Futura Medium", "ITC Avant Garde Gothic Pro Medium", "Helvetica Neue Medium", sans-serif; }
+
+a {
+  text-decoration: none; }
+
+p {
+  font-size: 1.4em; }
+
+p, h1, h2, ul, ol, li {
+  color: #1C130B; }
+
+.search {
+  padding: 1em;
+  margin: 1em;
+  height: 3em; }
+
+.header-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1em;
+  background: linear-gradient(to top right, rgba(34, 141, 198, 0.1) 20%, rgba(119, 192, 67, 0.1) 80%); }
+
+.logo-container img {
+  max-height: 120px;
+  width: auto; }
+
+.login-logout-container {
+  position: absolute;
+  top: 0;
+  right: 0;
+  margin: 1em;
+  gap: 1em; }
+
+@media screen and (max-width: 768px) {
+  .login-btn {
+    padding: 0.3em; } }
+.login-logout-container img {
+  width: 70px;
+  height: auto; }
+
+.modal {
+  display: none;
+  position: absolute;
+  top: 0;
+  right: 0;
+  z-index: 1;
+  margin: 2em;
+  border-radius: .5em;
+  font-family: "Futura Medium", "sans-serif", "ITC Avant Garde Gothic Pro Medium", "Helvetica Neue Medium";
+  box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2); }
+
+.modal-content {
+  text-align: left;
+  padding: 1em;
+  margin: auto;
+  max-width: 350px;
+  background-color: white; }
+
+.modal-content img {
+  max-width: 100px; }
+
+.close {
+  position: absolute;
+  right: .2em;
+  top: 0;
+  font-size: 3em;
+  font-weight: bold;
+  color: #228DC6;
+  cursor: pointer; }
+
+.close:hover {
+  color: #228DC6;
+  cursor: pointer; }
+
+.input-container {
+  display: flex;
+  flex-direction: column; }
+
+input[type=text], input[type=password] {
+  padding: 1em;
+  margin: 0.5em;
+  box-sizing: content-box; }
+
+button {
+  background-color: transparent;
+  border: none;
+  cursor: pointer; }
+
+button:hover {
+  opacity: 0.6; }
+
+.imgcontainer {
+  text-align: center;
+  margin-top: 2em; }
+
+.container {
+  padding: 1em;
+  border: none; }
+
+span.psw {
+  float: left;
+  padding: 0.2em; }
+
+.signup-form {
+  display: none; }
+
+.signup-form h2 {
+  text-align: center; }
+
+.signup-form form {
+  max-width: 350px;
+  margin: auto;
+  padding: 1em;
+  text-align: left; }
+
+.signup-form input {
+  padding: 1em;
+  margin: 0.5em;
+  box-sizing: content-box; }
+
+.signup-form button {
+  background-color: transparent;
+  border: none;
+  cursor: pointer; }
+
+.signup-form button:hover {
+  opacity: 0.6; }
+
+.navigation {
+  text-align: center;
+  padding: 1em;
+  background: linear-gradient(to bottom left, rgba(34, 141, 198, 0.1) 20%, rgba(119, 192, 67, 0.1) 80%); }
+
+.col-sm-4 {
+  padding: 2em;
+  font-size: .84em; }
+
+.col-sm-8 {
+  background-image: url("images/bkg01.png");
+  padding: 2em; }
+
+.col-sm-12 {
+  background-color: rgba(119, 192, 67, 0.6);
+  padding: 1em;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1em; }
+
+a.squiggle {
+  position: relative;
+  display: inline-block;
+  text-decoration: none; }
+
+a.squiggle::before {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background-position: 1 100%;
+  background-repeat: repeat-x;
+  background-size: 2px 2px;
+  transform: translateY(100%); }
+
+a.squiggle:hover::before {
+  background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 4'%3E%3Cstyle type='text/css'%3E.squiggle{animation:shift .3s linear infinite;}@keyframes shift {from {transform:translateX(0);}to {transform:translateX(-15px);}}%3C/style%3E%3Cpath fill='none' stroke='%230087ca' stroke-width='2' class='squiggle' d='M0,3.5 c 5,0,5,-3,10,-3 s 5,3,10,3 c 5,0,5,-3,10,-3 s 5,3,10,3'/%3E%3C/svg%3E");
+  background-size: auto 4px; }
+
+.light-box {
+  margin: .3em;
+  padding: 1em;
+  background-color: white;
+  opacity: .8; }
+
+footer {
+  text-align: center;
+  background-color: rgba(34, 141, 198, 0.4); }
+
+.animate {
+  -webkit-animation: animatezoom 0.3s;
+  animation: animatezoom 0.3s; }
+
+.container-fluid {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 10px 10px 3px #1c130b;
+  padding: 0.5em;
+  margin-bottom: 2em;
+  text-align: center; }
+
+.selected-pet {
+  display: flex;
+  margin: 0.5em;
+  position: relative; }
+
+.selected-pet img {
+  max-width: 100%;
+  border: 3px solid transparent; }
+
+.selected-pet:hover img {
+  border-color: #228DC6;
+  animation: pulse 2s; }
+
+@keyframes pulse {
+  0% {
+    transform: scale(1); }
+  50% {
+    transform: scale(1.1); }
+  100% {
+    transform: scale(1); } }
+@media screen and (max-width: 768px) {
+  .selected-pet {
+    display: none; } }
+.dropdown {
+  position: relative;
+  display: inline-block;
+  margin-top: 1em; }
+
+.dropbtn {
+  padding: 0.5em;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  border-radius: 5px; }
+
+.dropdown-content {
+  padding: 1em;
+  line-height: 1.5em;
+  display: none;
+  position: absolute;
+  top: 100%;
+  right: 0;
+  background-color: #f9f9f9;
+  min-width: 120px;
+  box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+  z-index: 1; }
+
+.dropdown-content a {
+  color: black;
+  display: block;
+  padding: .3em;
+  text-decoration: none; }
+
+.dropdown:hover .dropdown-content {
+  display: block; }
+
+.dropdown-content a:hover {
+  color: #228dc6;
+  font-weight: bolder; }
+
+@media screen and (min-width: 800px) {
+  .dropdown {
+    display: none; } }
+#recipeModal {
+  display: none;
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.4); }
+
+.recipe-card {
+  padding: 1em;
+  max-width: 300px;
+  border-radius: .5em;
+  background-color: rgba(34, 141, 198, 0.2);
+  box-shadow: 0 10px 20px -15px #1c130b; }
+
+.recipe-card img {
+  max-width: 100%;
+  height: auto;
+  border-radius: .5em; }
+
+.recipe-card h3 {
+  margin: 10px 0;
+  color: #1C130B; }
+
+.recipe-card:hover {
+  background-color: rgba(119, 192, 67, 0.6); }
+
+.recipe-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
+  padding: 1em; }
+
+.teaser {
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  overflow: hidden; }
+
+@-webkit-keyframes animatezoom {
+  from {
+    -webkit-transform: scale(0); }
+  to {
+    -webkit-transform: scale(1); } }
+@keyframes animatezoom {
+  from {
+    transform: scale(0); }
+  to {
+    transform: scale(1); } }
+@media screen and (max-width: 300px) {
+  span.psw {
+    display: block;
+    float: none; } }
+@media screen and (max-width: 768px) {
+  .recipe-grid {
+    grid-template-columns: repeat(auto-fill, minmax(100%, 1fr)); } }
