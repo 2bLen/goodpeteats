@@ -1,97 +1,37 @@
-<!-- functions.inc.php (includes) -->
+<!-- functions.inc.php -->
 <?php
+include_once 'includes/dbConnect.inc.php';
 
 function emptyInputSignup($name, $email, $username, $pwd, $pwdrepeat) {
-  $result;
-  if (empty($name) || empty($email) || empty($username) || empty($pwd) || empty($pwdrepeat)){
-    $result = true;}
-  else{
-    $result = false;}
-  return $result;}
+  return (empty($name) || empty($email) || empty($username) || empty($pwd) || empty($pwdrepeat));
+}
 
 function invalidUid($username){
-  $result;
-  if (!preg_match("/^[a-zA-Z0-9]*$/", $username)){
-    $result = true;}
-  else {
-    $result = false;}
-  return $result;}
+  return !preg_match("/^[a-zA-Z0-9]*$/", $username);
+}
 
 function invalidEmail($email){
-  $result;
-  if (!filter_var($email, FILTER_VALIDATE_EMAIL)){
-    $result = true;}
-  else{
-    $result = false;}
-  return $result;}
+  return !filter_var($email, FILTER_VALIDATE_EMAIL);
+}
 
 function pwdMatch($pwd, $pwdrepeat){
-  $result;
-  if ($pwd !== $pwdrepeat){
-    $result = true;}
-  else{
-    $result = false;}
-  return $result;}
+  return ($pwd !== $pwdrepeat);
+}
 
 function uidExists($conn, $username, $email){
   $sql = "SELECT * FROM users WHERE userUid = ? OR userEmail = ?;";
-  $stmt = mysqli_stmt_init($conn);
+  $stmt = $conn->prepare($sql);
+  $stmt->execute([$username, $email]);
+  $row = $stmt->fetch();
+  return ($row !== false);
+}
 
-  if (!mysqli_stmt_prepare($stmt, $sql)){
-    header("location: ../signup.php?error=stmtfailed");
-  exit();}
-
-  mysqli_stmt_bind_param($stmt, "ss", $username, $email);
-  mysqli_stmt_execute($stmt);
-
-  $resultData = mysqli_stmt_get_result($stmt);
-
-  if ($row = mysqli_fetch_assoc($resultData)){
-    return $row;}
-  else{
-    $return = false;
-    return $result;}    
-  mysqli_stmt_close($stmt);}
-    
-function createUser($conn, $userName, $userEmail, $userUID, $userPwd) {
+function createUser($conn, $userName, $userEmail, $userUid, $userPwd) {
   $sql = "INSERT INTO users(userName, userEmail, userUid, userPwd) VALUES (?, ?, ?, ?);";
-    $stmt = mysqli_stmt_init($conn);
-  if (!mysqli_stmt_prepare($stmt, $sql)) {
-    header("location: ../signup.php?error=stmtfailed");
-  exit();}
-
- $hashedPwd = password_hash($userPwd, PASSWORD_DEFAULT);
-
-  mysqli_stmt_bind_param($stmt, "ssss", $userName, $userEmail, $userUID, $hashedPwd);
-  mysqli_stmt_execute($stmt);
-  mysqli_stmt_close($stmt);
+  $stmt = $conn->prepare($sql);
+  $hashedPwd = password_hash($userPwd, PASSWORD_DEFAULT);
+  $stmt->execute([$userName, $userEmail, $userUid, $hashedPwd]);
   header("location: ../signup.php?error=none");
-    exit();}
-
-function emptyLogin($username, $pwd){
-	$result;
-  if (empty($username) || empty($pwd)){
-    $result = true;}
-  else {
-    $result = false;}
-  return $result;}
-  
-function loginUser($conn, $username, $pwd){
-  $uidExists = uidExists($conn, $username, $username);
-  if ($uidExists === false) {
-    header("location: ../signup.php?error=wronglogin");
-    exit();}
-    
-  $pwdHashed = $uidExists["userPwd"];
-  $checkPwd = password_verify($pwd, $pwdHashed);
-  
-  if ($checkPwd == false){
-    header("location: ../signup.php?error=wrongPwd");
-    exit();}
-  else if($checkPwd == true){
-    session_start();
-	  $_SESSION["userid"] = $uidExists["userId"];
-    $_SESSION["useruid"] = $uidExists["userUid"];
-    header("location: ../index.php");
-    exit();}}
-
+  exit();
+}
+?>

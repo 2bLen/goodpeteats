@@ -1,23 +1,9 @@
-<!-- logn.inc.php (includes) -->
+<!-- login.inc.php -->
 
 <?php
 session_start();
+require_once 'includes/dbConnect.inc.php';
+require_once 'includes/functions.inc.php';
 
-if (isset($_POST["submit"])) {
-  require_once 'database.inc.php';
-  require_once 'functions.inc.php';
 
-  $username = $_POST["username"];
-  $password = $_POST["password"];
-
-  if (emptyInputLogin($username, $password) !== true) {
-    header("location: ../login.php?error=emptyinput");
-    exit();
-  }
-
-  loginUser($conn, $username, $password);
-} else {
-  header("location: ../login.php");
-  exit();
-}
 ?>

@@ -1,7 +1,7 @@
-<!-- recipeSubmissions.php -->
+<!-- recipeSubmission.php -->
 
 <?php
-include_once 'header.php';
+include_once 'includes/header.inc.php';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   $recipeName = trim(htmlspecialchars($_POST['recipeName']));
@@ -14,7 +14,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   $password = 'your_password';
   $database = 'your_database';
   $table = 'recipes';
-
   $conn = mysqli_connect($host, $username, $password, $database);
 
   if (mysqli_connect_errno()) {
@@ -28,14 +27,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     mysqli_stmt_execute($stmt);
 
     if (mysqli_stmt_affected_rows($stmt) > 0) {
-      echo "<p>Thanks! If it passes our Quality Inspection, we'll add it to the database.</p>";
+      echo "<p>looks good, thanks. we'll post it after review</p>";
     } else {
-      echo "<p>Failed to insert the recipe into the database.</p>";
-    }
+      echo "<p>gosh, something went wrong, please try again</p>";}
 
     mysqli_stmt_close($stmt);
-    mysqli_close($conn);
-  }
+    mysqli_close($conn);}
 } else {
 ?>
 <form action="recipeSubmission.php" method="post">
@@ -48,61 +45,50 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   <label for="instructions">Instructions:</label>
   <textarea id="instructions" name="instructions" rows="8" required></textarea>
 
-  <label for="petType">Pet Type:</label>
+  <label for="petType">pet</label>
   <select id="petType" name="petType" required>
-    <option value="cat">Cat</option>
-    <option value="dog">Dog</option>
-  </select>
-
-  <button type="submit">Submit Recipe</button>
+    <option value="cat"> cat </option>
+    <option value="dog"> dog </option>
+	<option value="hamster"> hamster </option>
+    <option value="guineaPig"> guinea pig </option>
+    <option value="sugarGlider"> sugar glider </option>
+    <option value="goldfish"> goldfish </option>
+    <option value="ferret"> ferret </option>
+    <option value="parakeet"> parakeet </option>
+</select>
+<button type="submit">submit recipe</button>
 </form>
 
 <div id="submitRecipe" class="modal">
-  <div class="modal-content">
-    <span class="close" onclick="closeRecipeSubmissionModal()">&times;</span>
-    <h2>Submit Recipe</h2>
+<div class="modal-content">
+  <span class="close" onclick="closeRecipeSubmissionModal()">&times;</span>
 
-    <form action="recipeSubmission.php" method="post">
-      <label for="recipeName">Recipe Name:</label>
-      <input type="text" id="recipeName" name="recipeName" required>
+<h2>submit recipe</h2>
 
-      <label for="ingredients">Ingredients:</label>
-      <textarea id="ingredients" name="ingredients" rows="4" required></textarea>
+<form action="recipeSubmission.php" method="post">
+  <label for="recipeName">recipe name</label>
+  <input type="text" id="recipeName" name="recipeName" required>
 
-      <label for="instructions">Instructions:</label>
-      <textarea id="instructions" name="instructions" rows="8" required></textarea>
+  <label for="ingredients">ingredients (up to 9)</label>
+  <textarea id="ingredients" name="ingredients" rows="4" required></textarea>
 
-      <label for="petType">Pet Type:</label>
-      <select id="petType" name="petType" required>
-        <option value="cat">cat</option>
-        <option value="dog">dog</option>
-        <option value="dog">ferret</option>
-		<option value="hamster">hamster</option>
-		<option value="guineaPig">guinea pig</option>
-		<option value="sugarGlider">sugar glider</option>
- 		<option value="goldfish">goldfish</option>
-		<option value="ferret">ferret</option>
-		<option value="parakeet">parakeet</option>
-      </select>
+  <label for="instructions">instructions</label>
+  <textarea id="instructions" name="instructions" rows="8" required></textarea>
+
+  <label for="petType">pet</label>
+  <select id="petType" name="petType" required></select>
       
-      <button type="submit">Submit Recipe</button>
-    </form>
-  </div>
-</div>
+  <button type="submit">submit recipe for review</button></form>
+</div></div>
 
 <script>
 function openRecipeSubmissionModal() {
   const modal = document.getElementById('submitRecipe');
-  modal.style.display = 'block';
-}
+  modal.style.display = 'block';}
 
 function closeRecipeSubmissionModal() {
   const modal = document.getElementById('submitRecipe');
-  modal.style.display = 'none';
-}
+  modal.style.display = 'none';}
 </script>
 
-<?php
-}
-include_once 'footer.php';
-?>
+<?php } include_once 'includes/footer.inc.php'; ?>

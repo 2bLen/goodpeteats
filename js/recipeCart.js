@@ -1,4 +1,4 @@
-// recipeCart.js - ??react
+// recipeCart.js (js)... is this needed?
 
 import React from "react";
 import {

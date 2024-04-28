@@ -1,19 +1,19 @@
-<!-- cat.php -->
+<!-- goldfish.php -->
 
 <?php
 include_once 'includes/header.inc.php';
 include_once 'includes/dbConnect.inc.php';
 
 $recipes = [];
-try { //this took a long time...
-  $stmt_test = $conn->prepare("SELECT * FROM recipes LIMIT 1");
+try {
+  $stmt_test = $conn->prepare("SELECT DISTINCT * FROM recipes LIMIT 1");
   $test_success = $stmt_test->execute();
   $recipes_test = $stmt_test->fetchAll(PDO::FETCH_ASSOC);
   if ($test_success) {
     echo "";
   } else {
     echo "Test query failed. 'recipes' table not found or connection error<br>";}
-    $stmt = $conn->prepare("SELECT * FROM recipes WHERE `COL 2` = 'cat'");
+    $stmt = $conn->prepare("SELECT * FROM recipes WHERE `COL 2` = 'goldFish'");
     $stmt->execute();
     $recipes = $stmt->fetchAll(PDO::FETCH_ASSOC);
 } catch (PDOException $e) {
